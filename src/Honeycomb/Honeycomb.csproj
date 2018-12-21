@@ -33,7 +33,7 @@
   </ItemGroup>
   
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-	<Exec Command="mkdir &quot;$(ProjectDir)/git-info/&quot;" />
+	<Exec Command="mkdir &quot;$(ProjectDir)/git-info/&quot; | exit 0" />
 	<Exec Command="git rev-parse --short HEAD &gt; &quot;$(ProjectDir)/git-info/commit&quot;" />
 	<Exec Command="git rev-parse --abbrev-ref HEAD &gt; &quot;$(ProjectDir)/git-info/branch&quot;" />
 	<Exec Command="git remote get-url origin &gt; &quot;$(ProjectDir)/git-info/url&quot;" />
