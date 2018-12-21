@@ -11,6 +11,7 @@ namespace Honeycomb.Targets
         private static Dictionary<string, ITarget> _targets = new Dictionary<string, ITarget>
         {
             { "help", new HelpTarget() },
+            { "version", new VersionTarget() },
             { "create", new CreateTarget() },
             { "build", new BuildTarget() },
             { "clean", new CleanTarget() }
