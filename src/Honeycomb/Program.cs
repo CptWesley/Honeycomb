@@ -1,4 +1,5 @@
 ﻿using System;
+using Honeycomb.Targets;
 
 namespace Honeycomb
 {
@@ -18,6 +19,19 @@ namespace Honeycomb
             {
                 Console.WriteLine("No targets were supplied. Use 'honeycomb help' for more information.");
                 return ExitCode.NoTargets;
+            }
+
+            foreach (string arg in args)
+            {
+                if (TargetCollection.Contains(arg))
+                {
+                    TargetCollection.Get(arg).Perform();
+                }
+                else
+                {
+                    Console.WriteLine($"Unknown target '{arg}' found. Use 'honeycomb help' for a list of all available targets.");
+                    return ExitCode.UnknownTarget;
+                }
             }
 
             return ExitCode.Success;
