@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Honeycomb.Targets;
 
 namespace Honeycomb
@@ -12,29 +13,59 @@ namespace Honeycomb
         /// Entry function of the CLI.
         /// </summary>
         /// <param name="args">Program arguments.</param>
-        /// <returns>Exit code of the CLI.</returns>
-        public static int Main(string[] args)
+        public static void Main(string[] args)
         {
             if (args.Length <= 0)
             {
                 Console.WriteLine("No targets were supplied. Use 'honeycomb help' for more information.");
-                return ExitCode.NoTargets;
+                Exit(ExitCode.NoTargets);
             }
 
+            foreach (ITarget target in ParseArguments(args))
+            {
+                try
+                {
+                    target.Perform();
+                }
+                catch (TargetFailedException e)
+                {
+                    Console.WriteLine($"Failed executing target '{target.Name}' with message '{e.Message}'.");
+                    Exit(ExitCode.TargetFailed);
+                }
+            }
+
+            Exit(ExitCode.Success);
+        }
+
+        /// <summary>
+        /// Parses the arguments.
+        /// </summary>
+        /// <param name="args">Program arguments.</param>
+        /// <returns>A collection of all targets to be executed.</returns>
+        private static IEnumerable<ITarget> ParseArguments(string[] args)
+        {
             foreach (string arg in args)
             {
                 if (TargetCollection.Contains(arg))
                 {
-                    TargetCollection.Get(arg).Perform();
+                    yield return TargetCollection.Get(arg);
                 }
                 else
                 {
                     Console.WriteLine($"Unknown target '{arg}' found. Use 'honeycomb help' for a list of all available targets.");
-                    return ExitCode.UnknownTarget;
+                    Exit(ExitCode.UnknownTarget);
                 }
             }
+        }
 
-            return ExitCode.Success;
+        /// <summary>
+        /// Exits the application with the given exit code.
+        /// </summary>
+        /// <param name="exitCode">Exit code to exit with.</param>
+        private static void Exit(ExitCode exitCode)
+        {
+            Console.WriteLine($"Exited with code '{(int)exitCode}' ({exitCode}).");
+            Environment.Exit((int)exitCode);
         }
     }
 }

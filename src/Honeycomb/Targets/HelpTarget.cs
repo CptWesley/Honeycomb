@@ -7,6 +7,12 @@
     public class HelpTarget : ITarget
     {
         /// <inheritdoc/>
+        public string Name => "help";
+
+        /// <inheritdoc/>
+        public string Description => "Gives information about build targets and flags.";
+
+        /// <inheritdoc/>
         public void Perform()
         {
             throw new System.NotImplementedException();

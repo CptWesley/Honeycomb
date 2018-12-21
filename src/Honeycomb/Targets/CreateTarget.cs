@@ -7,6 +7,12 @@
     public class CreateTarget : ITarget
     {
         /// <inheritdoc/>
+        public string Name => "create";
+
+        /// <inheritdoc/>
+        public string Description => "Creates a new project.";
+
+        /// <inheritdoc/>
         public void Perform()
         {
             throw new System.NotImplementedException();

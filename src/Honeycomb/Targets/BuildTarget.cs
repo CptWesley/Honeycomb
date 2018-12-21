@@ -7,6 +7,12 @@
     public class BuildTarget : ITarget
     {
         /// <inheritdoc/>
+        public string Name => "build";
+
+        /// <inheritdoc/>
+        public string Description => "Builds the project.";
+
+        /// <inheritdoc/>
         public void Perform()
         {
             throw new System.NotImplementedException();

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 
 namespace Honeycomb.Targets
 {
@@ -8,14 +8,16 @@ namespace Honeycomb.Targets
     /// </summary>
     public static class TargetCollection
     {
-        private static Dictionary<string, ITarget> _targets = new Dictionary<string, ITarget>
+        private static ITarget[] _targets = new ITarget[]
         {
-            { "help", new HelpTarget() },
-            { "version", new VersionTarget() },
-            { "create", new CreateTarget() },
-            { "build", new BuildTarget() },
-            { "clean", new CleanTarget() }
+            new HelpTarget(),
+            new VersionTarget(),
+            new CreateTarget(),
+            new BuildTarget(),
+            new CleanTarget()
         };
+
+        private static Dictionary<string, ITarget> _dictionary = _targets.ToDictionary(x => x.Name, x => x);
 
         /// <summary>
         /// Gets the target instance based on a name.
@@ -23,7 +25,7 @@ namespace Honeycomb.Targets
         /// <param name="targetName">Name of the target.</param>
         /// <returns>The target if a match was found.</returns>
         public static ITarget Get(string targetName)
-            => _targets[targetName];
+            => _dictionary[targetName];
 
         /// <summary>
         /// Checks if a target name is known to the program.
@@ -31,21 +33,17 @@ namespace Honeycomb.Targets
         /// <param name="targetName">Name of the target.</param>
         /// <returns>True if known, false otherwise.</returns>
         public static bool Contains(string targetName)
-        {
-            return _targets.ContainsKey(targetName);
-        }
+            => _dictionary.ContainsKey(targetName);
 
         /// <summary>
-        /// Gets an array of all keys and values in the collection.
+        /// Gets an enumerable of all targets in the collection.
         /// </summary>
-        /// <returns>An array of tuples of all keys and values.</returns>
-        [SuppressMessage("Spacing Rules", "SA1008", Justification = "Space should not be there, seems to be a parsing error.")]
-        [SuppressMessage("Spacing Rules", "SA1009", Justification = "Space should not be there, seems to be a parsing error.")]
-        public static IEnumerable<(string name, ITarget target)> AsEnumerable()
+        /// <returns>An enumerable of targets.</returns>
+        public static IEnumerable<ITarget> AsEnumerable()
         {
-            foreach (KeyValuePair<string, ITarget> entry in _targets)
+            foreach (ITarget target in _targets)
             {
-                yield return (entry.Key, entry.Value);
+                yield return target;
             }
         }
     }
