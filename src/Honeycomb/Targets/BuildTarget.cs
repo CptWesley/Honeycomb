@@ -15,7 +15,7 @@
         /// <inheritdoc/>
         public void Perform()
         {
-            throw new System.NotImplementedException();
+            throw new TargetFailedException("Target is not yet implemented");
         }
     }
 }

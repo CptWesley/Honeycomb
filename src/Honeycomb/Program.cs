@@ -29,7 +29,7 @@ namespace Honeycomb
                 }
                 catch (TargetFailedException e)
                 {
-                    Console.WriteLine($"Failed executing target '{target.Name}' with message '{e.Message}'.");
+                    Console.WriteLine($"Failed executing target '{target.Name}' because '{e.Message}'.");
                     Exit(ExitCode.TargetFailed);
                 }
             }
