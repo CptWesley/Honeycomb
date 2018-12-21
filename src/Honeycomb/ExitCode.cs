@@ -19,5 +19,10 @@
         /// Exit code for when a given target was not known to the program.
         /// </summary>
         public const int UnknownTarget = 2;
+
+        /// <summary>
+        /// Exit code for when a given target has failed it's execution.
+        /// </summary>
+        public const int TargetFailed = 3;
     }
 }
