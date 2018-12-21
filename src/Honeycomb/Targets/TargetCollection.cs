@@ -17,7 +17,7 @@ namespace Honeycomb.Targets
             new CleanTarget()
         };
 
-        private static Dictionary<string, ITarget> _dictionary = _targets.ToDictionary(x => x.Name, x => x);
+        private static Dictionary<string, ITarget> _dictionary = _targets.ToDictionary(x => x.Name.ToUpperInvariant(), x => x);
 
         /// <summary>
         /// Gets the target instance based on a name.
@@ -25,7 +25,7 @@ namespace Honeycomb.Targets
         /// <param name="targetName">Name of the target.</param>
         /// <returns>The target if a match was found.</returns>
         public static ITarget Get(string targetName)
-            => _dictionary[targetName];
+            => _dictionary[targetName.ToUpperInvariant()];
 
         /// <summary>
         /// Checks if a target name is known to the program.
@@ -33,7 +33,7 @@ namespace Honeycomb.Targets
         /// <param name="targetName">Name of the target.</param>
         /// <returns>True if known, false otherwise.</returns>
         public static bool Contains(string targetName)
-            => _dictionary.ContainsKey(targetName);
+            => _dictionary.ContainsKey(targetName.ToUpperInvariant());
 
         /// <summary>
         /// Gets an enumerable of all targets in the collection.
