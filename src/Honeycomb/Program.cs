@@ -11,9 +11,16 @@ namespace Honeycomb
         /// Entry function of the CLI.
         /// </summary>
         /// <param name="args">Program arguments.</param>
-        public static void Main(string[] args)
+        /// <returns>Exit code of the CLI.</returns>
+        public static int Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            if (args.Length <= 0)
+            {
+                Console.WriteLine("No targets were supplied. Use 'honeycomb help' for more information.");
+                return ExitCode.NoTargets;
+            }
+
+            return ExitCode.Success;
         }
     }
 }
