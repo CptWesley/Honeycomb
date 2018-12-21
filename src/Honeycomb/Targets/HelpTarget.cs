@@ -1,4 +1,6 @@
-﻿namespace Honeycomb.Targets
+﻿using System;
+
+namespace Honeycomb.Targets
 {
     /// <summary>
     /// Target which displays all available targets.
@@ -15,7 +17,15 @@
         /// <inheritdoc/>
         public void Perform()
         {
-            throw new System.NotImplementedException();
+            Console.WriteLine("Usage: 'honeycomb <target>'");
+            Console.WriteLine("Optionally a user can specify multiple targets to be executed in succession: 'honeycomb <target1> <target2> ...'");
+            Console.WriteLine();
+            Console.WriteLine("### Available Targets:");
+
+            foreach (ITarget target in TargetCollection.AsEnumerable())
+            {
+                Console.WriteLine($"{target.Name} - {target.Description}");
+            }
         }
     }
 }
