@@ -64,6 +64,7 @@ namespace Honeycomb
         /// <param name="exitCode">Exit code to exit with.</param>
         private static void Exit(ExitCode exitCode)
         {
+            Console.WriteLine();
             Console.WriteLine($"Exited with code '{(int)exitCode}' ({exitCode}).");
             Environment.Exit((int)exitCode);
         }
