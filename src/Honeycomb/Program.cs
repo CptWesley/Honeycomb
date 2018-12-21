@@ -42,13 +42,15 @@ namespace Honeycomb
         /// </summary>
         /// <param name="args">Program arguments.</param>
         /// <returns>A collection of all targets to be executed.</returns>
-        private static IEnumerable<ITarget> ParseArguments(string[] args)
+        private static List<ITarget> ParseArguments(string[] args)
         {
+            List<ITarget> result = new List<ITarget>();
+
             foreach (string arg in args)
             {
                 if (TargetCollection.Contains(arg))
                 {
-                    yield return TargetCollection.Get(arg);
+                    result.Add(TargetCollection.Get(arg));
                 }
                 else
                 {
@@ -56,6 +58,8 @@ namespace Honeycomb
                     Exit(ExitCode.UnknownTarget);
                 }
             }
+
+            return result;
         }
 
         /// <summary>
