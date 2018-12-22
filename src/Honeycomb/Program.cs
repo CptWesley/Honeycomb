@@ -23,13 +23,16 @@ namespace Honeycomb
 
             foreach (ITarget target in ParseArguments(args))
             {
+                HoneycombConsole.WriteInfoLine($"Starting target '{target.Name}'...");
                 try
                 {
                     target.Perform();
+                    HoneycombConsole.WriteNewline();
                 }
                 catch (TargetFailedException e)
                 {
                     HoneycombConsole.WriteErrorLine($"Failed executing target '{target.Name}' because '{e.Message}'.");
+                    HoneycombConsole.WriteNewline();
                     Exit(ExitCode.TargetFailed);
                 }
             }
@@ -68,7 +71,6 @@ namespace Honeycomb
         /// <param name="exitCode">Exit code to exit with.</param>
         private static void Exit(ExitCode exitCode)
         {
-            HoneycombConsole.WriteNewline();
             ConsoleColor color = exitCode == 0 ? ConsoleColor.Green : ConsoleColor.Red;
             HoneycombConsole.WriteLine($"Finished with status '{(int)exitCode}' ({exitCode}).", color);
             Environment.Exit((int)exitCode);

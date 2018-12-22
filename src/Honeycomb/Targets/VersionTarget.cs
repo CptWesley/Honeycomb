@@ -18,7 +18,7 @@ namespace Honeycomb.Targets
         public void Perform()
         {
             AssemblyName asm = Assembly.GetExecutingAssembly().GetName();
-            HoneycombConsole.WriteInfoLine($"### {asm.Name} ###");
+            HoneycombConsole.WriteInfoLine($"name: {asm.Name}");
             HoneycombConsole.WriteInfoLine($"version: {asm.Version}");
             HoneycombConsole.WriteInfoLine($"url: {GitInfo.GetAddress()}");
             HoneycombConsole.WriteInfoLine($"branch: {GitInfo.GetBranch()}");
