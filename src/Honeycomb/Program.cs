@@ -70,7 +70,7 @@ namespace Honeycomb
         {
             HoneycombConsole.WriteNewline();
             ConsoleColor color = exitCode == 0 ? ConsoleColor.Green : ConsoleColor.Red;
-            HoneycombConsole.WriteLine($"Exited with status '{(int)exitCode}' ({exitCode}).", color);
+            HoneycombConsole.WriteLine($"Finished with status '{(int)exitCode}' ({exitCode}).", color);
             Environment.Exit((int)exitCode);
         }
     }
