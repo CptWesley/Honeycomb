@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Honeycomb.Targets
+﻿namespace Honeycomb.Targets
 {
     /// <summary>
     /// Target which displays all available targets.

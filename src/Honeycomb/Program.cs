@@ -69,7 +69,8 @@ namespace Honeycomb
         private static void Exit(ExitCode exitCode)
         {
             HoneycombConsole.WriteNewline();
-            HoneycombConsole.WriteInfoLine($"Exited with code '{(int)exitCode}' ({exitCode}).");
+            ConsoleColor color = exitCode == 0 ? ConsoleColor.Green : ConsoleColor.Red;
+            HoneycombConsole.WriteLine($"Exited with status '{(int)exitCode}' ({exitCode}).", color);
             Environment.Exit((int)exitCode);
         }
     }
