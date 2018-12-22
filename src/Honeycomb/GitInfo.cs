@@ -35,7 +35,7 @@ namespace Honeycomb
             {
                 if (stream == null)
                 {
-                    return "-";
+                    return string.Empty;
                 }
 
                 using (StreamReader sr = new StreamReader(stream))
