@@ -17,7 +17,7 @@ namespace Honeycomb
         {
             if (args.Length <= 0)
             {
-                Console.WriteLine("No targets were supplied. Use 'honeycomb help' for more information.");
+                HoneycombConsole.WriteErrorLine("No targets were supplied. Use 'honeycomb help' for more information.");
                 Exit(ExitCode.NoTargets);
             }
 
@@ -29,7 +29,7 @@ namespace Honeycomb
                 }
                 catch (TargetFailedException e)
                 {
-                    Console.WriteLine($"Failed executing target '{target.Name}' because '{e.Message}'.");
+                    HoneycombConsole.WriteErrorLine($"Failed executing target '{target.Name}' because '{e.Message}'.");
                     Exit(ExitCode.TargetFailed);
                 }
             }
@@ -54,7 +54,7 @@ namespace Honeycomb
                 }
                 else
                 {
-                    Console.WriteLine($"Unknown target '{arg}' found. Use 'honeycomb help' for a list of all available targets.");
+                    HoneycombConsole.WriteErrorLine($"Unknown target '{arg}' found. Use 'honeycomb help' for a list of all available targets.");
                     Exit(ExitCode.UnknownTarget);
                 }
             }
@@ -68,8 +68,8 @@ namespace Honeycomb
         /// <param name="exitCode">Exit code to exit with.</param>
         private static void Exit(ExitCode exitCode)
         {
-            Console.WriteLine();
-            Console.WriteLine($"Exited with code '{(int)exitCode}' ({exitCode}).");
+            HoneycombConsole.WriteNewline();
+            HoneycombConsole.WriteInfoLine($"Exited with code '{(int)exitCode}' ({exitCode}).");
             Environment.Exit((int)exitCode);
         }
     }

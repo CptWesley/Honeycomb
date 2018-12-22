@@ -19,11 +19,11 @@ namespace Honeycomb.Targets
         public void Perform()
         {
             AssemblyName asm = Assembly.GetExecutingAssembly().GetName();
-            Console.WriteLine($"### {asm.Name} ###");
-            Console.WriteLine($"version: {asm.Version}");
-            Console.WriteLine($"url: {GitInfo.GetAddress()}");
-            Console.WriteLine($"branch: {GitInfo.GetBranch()}");
-            Console.WriteLine($"commit: {GitInfo.GetCommit()}");
+            HoneycombConsole.WriteInfoLine($"### {asm.Name} ###");
+            HoneycombConsole.WriteInfoLine($"version: {asm.Version}");
+            HoneycombConsole.WriteInfoLine($"url: {GitInfo.GetAddress()}");
+            HoneycombConsole.WriteInfoLine($"branch: {GitInfo.GetBranch()}");
+            HoneycombConsole.WriteInfoLine($"commit: {GitInfo.GetCommit()}");
         }
     }
 }
